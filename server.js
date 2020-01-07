@@ -4,9 +4,9 @@ const bodyParser = require('body-parser')
 const shortid = require('shortid')
 const cors = require('cors')
 
-process.env.MONGO_URI = 'mongodb://minhha-db:minhha89@cluster0-7zk5p.mongodb.net/test?retryWrites=true&w=majority'
+process.env.MONGO_URI = 'mongodb+srv://minhha-db:minhha89@cluster0-7zk5p.mongodb.net/test?retryWrites=true&w=majority'
 const mongoose = require('mongoose')
-mongoose.connect(process.env.MONGO_URI, { useMongoClient: true, useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true})
 
 app.use(cors())
 
