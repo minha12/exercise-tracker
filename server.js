@@ -6,7 +6,9 @@ const cors = require('cors')
 
 process.env.MONGO_URI = 'mongodb+srv://minhha-db:minhha89@cluster0-7zk5p.mongodb.net/test?retryWrites=true&w=majority'
 const mongoose = require('mongoose')
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
+  if(!err) console.log('Sucessfully connected to MongoDB')
+})
 
 app.use(cors())
 
@@ -21,10 +23,11 @@ app.get('/', (req, res) => {
 
 
 // Not found middleware
+/*
 app.use((req, res, next) => {
   return next({status: 404, message: 'not found'})
 })
-
+*/
 // Error Handling middleware
 app.use((err, req, res, next) => {
   let errCode, errMessage
@@ -59,16 +62,16 @@ const Tracker = mongoose.model("Tracker", appSchema)
 
 //Create a new user
 app.post('/api/exercise/new-user', (req,res) => {
+  //console.log('hehe')
   let newName = req.body.username
-  //console.log(newName)
+  console.log(newName)
   Tracker.findOne({username: `${newName}`}, (err, data) => {
-    if(err) {
-      console.log(err)
-      return err
-    }
+    if(err) return err
+    //console.log('Creating user ...')
     if(data){
       res.send("Username was taken")
     } else {
+      console.log('creating user ...')
       Tracker.create({username: `${newName}`, userId: shortid.generate() }, (err, data) => {
         if(err) return err
         res.send(data)
