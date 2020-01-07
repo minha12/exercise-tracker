@@ -95,7 +95,7 @@ app.post('/api/exercise/add', (req, res) => {
   }
   console.log(log)
   
-  Tracker.findByIdAndUpdate({userId: userId}, {$push: {log: log}}, {upsert: true, new: true}, (err, data) => {
+  Tracker.findOneAndUpdate({_id: userId}, {log: log}, (err, data) => {
     if(err) return err
     res.send(data)
   })
@@ -109,7 +109,7 @@ app.get('/api/exercise/log', (req, res) => {
   const fromD = new Date(from)
   const toD = new Date(to)
   
-  Tracker.findById(userId, (err, data) => {
+  Tracker.findById({_id: userId}, (err, data) => {
     if(err) return err
     if(from) {
       const filteredData = {
