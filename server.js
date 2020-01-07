@@ -103,7 +103,14 @@ app.get('/api/exercise/log', (req, res) => {
   Tracker.findById(userId, (err, data) => {
     if(err) return err
     if(from) {
-      
+      const filteredData = {
+        userName: data.userName,
+        userId: data.userId,
+        log: []
+      }
+      data.log.map(item => {
+        
+      })
     }
   })
 })
