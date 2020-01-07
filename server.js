@@ -97,7 +97,15 @@ app.get('/api/exercise/log', (req, res) => {
   const userId = req.query.userId
   const from = req.query.from
   const to = req.query.to
-  const fromM = moment()
+  const fromD = new Date(from)
+  const toD = new Date(to)
+  
+  Tracker.findById(userId, (err, data) => {
+    if(err) return err
+    if(from) {
+      
+    }
+  })
 })
 /////////////////////////////////////////////////////////////////
 
