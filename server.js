@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-
+const shortid = require('shortid')
 const cors = require('cors')
 
 process.env.MONGO_URI = 'mongodb+srv://minhha-db:minhha89@cluster0-7zk5p.mongodb.net/test?retryWrites=true&w=majority'
@@ -65,7 +65,7 @@ app.post('/api/exercise/new-user', (req,res) => {
     if(data){
       res.send("Username was taken")
     } else {
-      Tracker.create({username: `${newName}`}, (err, data) => {
+      Tracker.create({username: `${newName}`, userId: shortid.generate() }, (err, data) => {
         if(err) return err
         res.send(data)
       })
