@@ -65,16 +65,17 @@ app.post('/api/exercise/new-user', (req,res) => {
   //console.log('hehe')
   let newName = req.body.username
   console.log(newName)
-  Tracker.findOne({username: `${newName}`}, (err, data) => {
+  Tracker.findOne({userName: `${newName}`}, (err, data) => {
     if(err) return err
     //console.log('Creating user ...')
     if(data){
       res.send("Username was taken")
     } else {
-      console.log('creating user ...')
-      Tracker.create({username: `${newName}`, userId: shortid.generate() }, (err, data) => {
+      console.log('creating user ' + `${newName}`)
+      let newUser = new Tracker({userName: newName, userId: shortid.generate() })
+      newUser.save((err, data) => {
         if(err) return err
-        res.send(data)
+        res.json({userName: data.userName, _id: data._id})
       })
     }
   })
