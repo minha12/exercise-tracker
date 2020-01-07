@@ -56,14 +56,36 @@ const appSchema = new Schema({
   }]
 })
 const Tracker = mongoose.model("Tracker", appSchema)
+
+//Create a new user
 app.post('/api/exercise/new-user', (req,res) => {
   let newName = req.body.username
   Tracker.findOne({username: `${newName}`}, (err, data) => {
     if(err) return err
     if(data){
-      res.send("It was taken")
+      res.send("Username was taken")
+    } else {
+      Tracker.create({username: `${newName}`}, (err, data) => {
+        if(err) return err
+        res.send(data)
+      })
     }
   })
+})
+
+//Add exercises
+app.post('/api/exercise/add', (req, res) => {
+  let userId = req.body.userId
+  let description = req.body.description
+  let duration = req.body.duration
+  let date = req.body.date
+  
+  const log = {
+    description: `${description}`,
+    duration: `${duration}`,
+    date: `{date}`
+  }
+  
 })
 /////////////////////////////////////////////////////////////////
 
