@@ -45,7 +45,26 @@ app.use((err, req, res, next) => {
 })
 
 ///////////////////////////MY APP////////////////////////////////
-const Schema
+const Schema = mongoose.Schema
+const appSchema = new Schema({
+  userName: String,
+  userId: String,
+  log: [{
+    description: String,
+    duration: Number,
+    date: {type: Date, default: Date.now}
+  }]
+})
+const Tracker = mongoose.model("Tracker", appSchema)
+app.post('/api/exercise/new-user', (req,res) => {
+  let newName = req.body.username
+  Tracker.findOne({username: `${newName}`}, (err, data) => {
+    if(err) return err
+    if(data){
+      res.send("It was taken")
+    }
+  })
+})
 /////////////////////////////////////////////////////////////////
 
 const listener = app.listen(process.env.PORT || 3000, () => {
