@@ -89,12 +89,13 @@ app.post('/api/exercise/add', (req, res) => {
   let date = req.body.date
   
   const log = {
-    description: `${description}`,
-    duration: `${duration}`,
-    date: `{date}`
+    description: description,
+    duration: duration,
+    date: date
   }
+  console.log(log)
   
-  Tracker.findByIdAndUpdate(userId, {'$push': {log: log}}, {upsert: true, new: true}, (err, data) => {
+  Tracker.findByIdAndUpdate({userId: userId}, {$push: {log: log}}, {upsert: true, new: true}, (err, data) => {
     if(err) return err
     res.send(data)
   })
