@@ -86,6 +86,18 @@ app.post('/api/exercise/add', (req, res) => {
     date: `{date}`
   }
   
+  Tracker.findByIdAndUpdate(userId, {'$push': {log: log}}, {upsert: true, new: true}, (err, data) => {
+    if(err) return err
+    res.send(data)
+  })
+})
+
+//Request for log
+app.get('/api/exercise/log', (req, res) => {
+  const userId = req.query.userId
+  const from = req.query.from
+  const to = req.query.to
+  const fromM = moment()
 })
 /////////////////////////////////////////////////////////////////
 
