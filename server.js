@@ -60,8 +60,12 @@ const Tracker = mongoose.model("Tracker", appSchema)
 //Create a new user
 app.post('/api/exercise/new-user', (req,res) => {
   let newName = req.body.username
+  console.log(newName)
   Tracker.findOne({username: `${newName}`}, (err, data) => {
-    if(err) return err
+    if(err) {
+      console.log(err)
+      return err
+    }
     if(data){
       res.send("Username was taken")
     } else {
@@ -109,9 +113,22 @@ app.get('/api/exercise/log', (req, res) => {
         log: []
       }
       data.log.map(item => {
-        
+        const dateD = new Date(item.date)
+        if(dateD.isAfter(fromD) && dateD.isBefore(toD)) {
+          filteredData.log.push(item)
+        }
       })
+      res.send(filteredData)
+    } else {
+      res.send(data)
     }
+  })
+})
+//Request for all users
+app.get('/api/exercise/users', (req, res) => {
+  Tracker.find({}, {log: false}, (err, data) => {
+    if(err) return err
+    res.json(data)
   })
 })
 /////////////////////////////////////////////////////////////////
