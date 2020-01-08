@@ -103,27 +103,23 @@ app.post('/api/exercise/add', (req, res) => {
 //Request for log
 app.get('/api/exercise/log', (req, res) => {
   const userId = req.query.userId
-  const from = req.query.from
-  const to = req.query.to
+  const from = req.query.from ? new Date(req.query.from) : new Date()
+  const to = req.query.to ? new Date(req.query.from) : new Date()
   const limit = req.query.limit
-  const fromD = new Date(from)
-  const toD = new Date(to)
   
   Tracker.findById({_id: userId}, (err, data) => {
     if(err) return err
-    if(from) {
-      const filteredData = {
-        userName: data.userName,
-        userId: data.userId,
-        log: []
+    if(data) {
+      const dataLog = data.log
+      const filteredLog = dataLog.filter(item => (item.date >= from && item.date <= to))
+      if(!isNaN(limit) && filteredLog.length >= limit) {
+        filteredLog = filteredLog.slice(0, limit)
       }
-      data.log.map(item => {
-        const dateD = new Date(item.date)
-        if(dateD.isAfter(fromD) && dateD.isBefore(toD)) {
-          filteredData.log.push(item)
-        }
+      res.json({
+        userName: data.userName,
+        _id: data._id,
+        
       })
-      res.send(filteredData)
     } else {
       res.send(data)
     }
