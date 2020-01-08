@@ -103,7 +103,8 @@ app.post('/api/exercise/add', (req, res) => {
 //Request for log
 app.get('/api/exercise/log', (req, res) => {
   const userId = req.query.userId
-  const from = req.query.from ? new Date(req.query.from) : new Date()
+  const from = req.query.from ? new Date(req.query.from) : new Date('1970-01-01')
+  //console.log(from)
   const to = req.query.to ? new Date(req.query.from) : new Date()
   const limit = req.query.limit
   
@@ -111,6 +112,7 @@ app.get('/api/exercise/log', (req, res) => {
     if(err) return err
     if(data) {
       const dataLog = data.log
+      console.log(dataLog)
       const filteredLog = dataLog.filter(item => (item.date >= from && item.date <= to))
       if(!isNaN(limit) && filteredLog.length >= limit) {
         filteredLog = filteredLog.slice(0, limit)
