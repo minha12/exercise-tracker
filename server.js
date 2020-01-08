@@ -118,10 +118,13 @@ app.get('/api/exercise/log', (req, res) => {
       res.json({
         userName: data.userName,
         _id: data._id,
-        
+        from: req.query.from ? from : undefined,
+        to: req.query.to ? to : undefined,
+        count: filteredLog.length,
+        log: filteredLog
       })
     } else {
-      res.send(data)
+      res.send('In correct ID, please give an correct ID')
     }
   })
 })
