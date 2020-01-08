@@ -51,7 +51,6 @@ app.use((err, req, res, next) => {
 const Schema = mongoose.Schema
 const appSchema = new Schema({
   userName: String,
-  userId: String,
   log: [{
     description: String,
     duration: Number,
@@ -72,7 +71,7 @@ app.post('/api/exercise/new-user', (req,res) => {
       res.send("Username was taken")
     } else {
       console.log('creating user ' + `${newName}`)
-      let newUser = new Tracker({userName: newName, userId: shortid.generate() })
+      let newUser = new Tracker({userName: newName })
       newUser.save((err, data) => {
         if(err) return err
         res.json({userName: data.userName, _id: data._id})
@@ -106,6 +105,7 @@ app.get('/api/exercise/log', (req, res) => {
   const userId = req.query.userId
   const from = req.query.from
   const to = req.query.to
+  const limit = req.query.limit
   const fromD = new Date(from)
   const toD = new Date(to)
   
