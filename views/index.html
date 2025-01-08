@@ -51,13 +51,40 @@
          <div class="endpoint-section">
             <div class="endpoint-header">
                <span class="method-get">GET</span>
+               <code>/api/exercise/users</code>
+            </div>
+            <div class="endpoint-description">
+               <h3>Get All Users</h3>
+               <div class="form-container">
+                  <button id="get-users-btn" onclick="handleGetUsers()">Get All Users</button>
+                  <div id="users-result" class="result-box"></div>
+               </div>
+            </div>
+         </div>
+
+         <div class="endpoint-section">
+            <div class="endpoint-header">
+               <span class="method-get">GET</span>
                <code>/api/exercise/log</code>
             </div>
             <div class="endpoint-description">
                <h3>Get User's Exercise Log</h3>
-               <p><code>GET /api/exercise/log?{userId}[&amp;from][&amp;to][&amp;limit]</code></p>
-               <p class="param-note"><strong>{ }</strong> = required, <strong>[ ]</strong> = optional</p>
-               <p class="param-note"><strong>from, to</strong> = dates (yyyy-mm-dd); <strong>limit</strong> = number</p>
+               <div class="form-container">
+                  <form id="log-form" onsubmit="handleGetLog(event)">
+                     <input id="log-userId" type="text" name="userId" placeholder="userId*" required>
+                     <input id="log-from" type="date" name="from" placeholder="from (yyyy-mm-dd)">
+                     <input id="log-to" type="date" name="to" placeholder="to (yyyy-mm-dd)">
+                     <input id="log-limit" type="number" name="limit" placeholder="limit (number)">
+                     <input type="submit" value="Get Log">
+                  </form>
+                  <div id="log-result" class="result-box"></div>
+               </div>
+               <div class="examples-section">
+                  <h4>Examples:</h4>
+                  <p><code>/api/exercise/log?userId=12345</code> - Get full exercise log</p>
+                  <p><code>/api/exercise/log?userId=12345&from=2024-01-01&to=2024-12-31</code> - Get log with date filter</p>
+                  <p><code>/api/exercise/log?userId=12345&limit=5</code> - Get log with limit</p>
+               </div>
             </div>
          </div>
       </div>
