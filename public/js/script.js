@@ -3,8 +3,9 @@ const BASE_URL = window.location.origin;
 // Helper function to show results
 function showResult(elementId, message) {
   const resultElement = document.getElementById(elementId);
-  resultElement.textContent = JSON.stringify(message, null, 2);
+  resultElement.innerHTML = `<pre>${JSON.stringify(message, null, 2)}</pre>`;
   resultElement.classList.add('show');
+  resultElement.style.whiteSpace = 'pre-wrap';
 }
 
 async function handleNewUser(event) {
