@@ -230,6 +230,17 @@ form input[type="submit"]:hover {
   display: block;
 }
 
+.result-box pre {
+  margin: 0;
+  font-family: monospace;
+  font-size: 14px;
+  background: #2c3e50;
+  color: #fff;
+  padding: 15px;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
 form input[type="number"],
 form input[type="date"] {
   width: 100%;
@@ -257,17 +268,13 @@ form input[type="date"] {
 }
 
 button#get-users-btn {
-  width: 100%;
-  max-width: 400px;
-  padding: 10px;
+  width: auto;
+  min-width: 120px;
+  padding: 10px 20px;
   background: #007bff;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
-}
-
-button#get-users-btn:hover {
-  background: #0056b3;
 }

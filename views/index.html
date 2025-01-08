@@ -20,7 +20,7 @@
                <h3>Create a New User</h3>
                <div class="form-container">
                   <form id="new-user-form" action="/api/exercise/new-user" method="post">
-                     <input id="uname" type="text" name="username" placeholder="username" required>
+                     <input id="uname" type="text" name="username" placeholder="username" value="test_user" required>
                      <input type="submit" value="Submit">
                   </form>
                   <div id="user-result" class="result-box"></div>
@@ -37,10 +37,10 @@
                <h3>Add exercises</h3>
                <div class="form-container">
                   <form id="exercise-form" action="/api/exercise/add" method="post">
-                     <input id="uid" type="text" name="userId" placeholder="userId*" required>
-                     <input id="desc" type="text" name="description" placeholder="description*" required>
-                     <input id="dur" type="number" name="duration" placeholder="duration* (mins.)" required>
-                     <input id="dat" type="date" name="date" placeholder="date (yyyy-mm-dd)">
+                     <input id="uid" type="text" name="userId" placeholder="userId*" value="507f1f77bcf86cd799439011" required>
+                     <input id="desc" type="text" name="description" placeholder="description*" value="running" required>
+                     <input id="dur" type="number" name="duration" placeholder="duration* (mins.)" value="30" required>
+                     <input id="dat" type="date" name="date" value="2024-01-01">
                      <input type="submit" value="Submit">
                   </form>
                   <div id="exercise-result" class="result-box"></div>
@@ -71,10 +71,10 @@
                <h3>Get User's Exercise Log</h3>
                <div class="form-container">
                   <form id="log-form" onsubmit="handleGetLog(event)">
-                     <input id="log-userId" type="text" name="userId" placeholder="userId*" required>
-                     <input id="log-from" type="date" name="from" placeholder="from (yyyy-mm-dd)">
-                     <input id="log-to" type="date" name="to" placeholder="to (yyyy-mm-dd)">
-                     <input id="log-limit" type="number" name="limit" placeholder="limit (number)">
+                     <input id="log-userId" type="text" name="userId" placeholder="userId*" value="507f1f77bcf86cd799439011" required>
+                     <input id="log-from" type="date" name="from" value="2024-01-01">
+                     <input id="log-to" type="date" name="to" value="2024-12-31">
+                     <input id="log-limit" type="number" name="limit" value="5">
                      <input type="submit" value="Get Log">
                   </form>
                   <div id="log-result" class="result-box"></div>
