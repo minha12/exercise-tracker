@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>URL Shortener Microservice</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+    <link href="/public/css/style.css" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>URL Shortener Microservice</h1>
+      
+      <div class="endpoint-section">
+        <div class="endpoint-header">
+          <span class="method-post">POST</span>
+          <code>/api/shorturl/new</code>
+        </div>
+        
+        <div class="endpoint-description">
+          <p>Creates a short URL for a given valid URL.</p>
+          
+          <h3>Try it out</h3>
+          <div class="demo-box">
+            <form action="api/shorturl/new" method="POST">
+              <input id="url_input" type="text" name="url" placeholder="https://www.example.com" />
+              <input type="submit" value="Shorten URL" />
+            </form>
+            <div class="examples-section">
+              <h3>Example Request:</h3>
+              <div class="example-box">
+                <div class="request">
+                  <span class="method-post">POST</span>
+                  <code>/api/shorturl/new</code>
+                  <pre>{
+  "url": "https://www.freecodecamp.org"
+}</pre>
+                </div>
+                <div class="response">
+                  <h4>Response:</h4>
+                  <pre>{
+  "original_url": "https://www.freecodecamp.org",
+  "short_url": 1
+}</pre>
+                </div>
+              </div>
+
+              <h3>Using Short URL:</h3>
+              <div class="example-box">
+                <div class="request">
+                  <span class="method-get">GET</span>
+                  <code>/api/shorturl/1</code>
+                </div>
+                <div class="response">
+                  <p>Redirects to: https://www.freecodecamp.org</p>
+                </div>
+              </div>
+
+              <h3>Invalid URL Example:</h3>
+              <div class="example-box">
+                <div class="request">
+                  <span class="method-post">POST</span>
+                  <code>/api/shorturl/new</code>
+                  <pre>{
+  "url": "invalid-url"
+}</pre>
+                </div>
+                <div class="response">
+                  <h4>Response:</h4>
+                  <pre>{
+  "error": "invalid url"
+}</pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <p>by <a href="https://minha12.github.io/personal-portfolio/">Minh-Ha Le</a></p>
+    </div>
+  </body>
+</html>

@@ -3,6 +3,7 @@ const app = express()
 const bodyParser = require('body-parser')
 const shortid = require('shortid')
 const cors = require('cors')
+const path = require('path')  // Add this line
 require('dotenv').config();
 
 const mongoURI = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER}/?retryWrites=true&w=majority&appName=Cluster0`;
@@ -16,8 +17,8 @@ app.use(cors())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
+app.use('/public', express.static(path.join(__dirname, 'public')))
 
-app.use(express.static('public'))
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html')
 });
@@ -141,5 +142,5 @@ app.get('/api/exercise/users', (req, res) => {
 /////////////////////////////////////////////////////////////////
 
 const listener = app.listen(process.env.PORT || 3000, () => {
-  console.log('Your app is listening on port ' + listener.address().port)
+  console.log(`Your app is listening on port ${listener.address().port}`)
 })
