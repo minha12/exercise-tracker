@@ -3,11 +3,12 @@ const app = express()
 const bodyParser = require('body-parser')
 const shortid = require('shortid')
 const cors = require('cors')
+require('dotenv').config();
 
-process.env.MONGO_URI = 'mongodb+srv://minhha-db:minhha89@cluster0-7zk5p.mongodb.net/test?retryWrites=true&w=majority'
+const mongoURI = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER}/?retryWrites=true&w=majority&appName=Cluster0`;
 const mongoose = require('mongoose')
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
-  if(!err) console.log('Sucessfully connected to MongoDB')
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
+  if(!err) console.log('Successfully connected to MongoDB')
 })
 
 app.use(cors())
